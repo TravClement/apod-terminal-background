@@ -18,4 +18,4 @@ with open('C:\\Users\\Zac\\AppData\\Local\\Packages\\Microsoft.WindowsTerminal_8
 data['profiles']['defaults']['backgroundImage'] = request['hdurl']
 # Reopen the settings file and write the updated image
 with open('C:\\Users\\Zac\\AppData\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\settings.json', 'w') as settings:
-    json.dump(data, settings)
+    json.dump(data, settings, indent=4)
