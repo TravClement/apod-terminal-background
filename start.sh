@@ -47,7 +47,9 @@ fi
 
 if [ -f "${APOD_SAVE_DIR}background.jpg" ]; then
     # To stop getting new images if the image was updated today
-    if test $(( $(date -r "${APOD_SAVE_DIR}background.jpg" +%s) / 86400)) == $(( $(date +%s) / 86400)); then
+    backgroundDate=$(( $(date -r "${APOD_SAVE_DIR}background.jpg" +%s) / 86400))
+    todayDate=$(( $(date +%s) / 86400))
+    if test $backgroundDate == $todayDate; then
         return
     fi
 
@@ -61,6 +63,7 @@ if test "$res" != "0"; then
     echo "Copying default background to background.jpg"
     cp "${APOD_SAVE_DIR}default_background.jpg" "${APOD_SAVE_DIR}background.jpg"
 fi
+touch ${APOD_SAVE_DIR}background.jpg
 
 wt.exe nt
 sudo kill -9 $PPID
