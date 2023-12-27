@@ -23,12 +23,12 @@ get_image () {
     res=$(curl "https://api.nasa.gov/planetary/apod?api_key=$APOD_API_KEY$date")
     code=$?
 
-    echo "res: $res"
+    printf 'res: %s' "$res"
     echo "code: $code"
 
-    if test "$code" == "0"; then
+    if test "$code" = "0"; then
         echo "Getting the image for $1"
-        echo "$res" | jq '.hdurl' | xargs wget -O $saved_location
+        printf '%s' "$res" | jq '.hdurl' | xargs wget -O $saved_location
         return 0
     else
         return 1 
